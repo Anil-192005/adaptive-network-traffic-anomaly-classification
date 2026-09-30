@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python environment variables & secrets
+.env
+.env.local
+.env.*.local
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.gemini/
+
+# Raw logs & scratch tasks
+*.log
+.system_generated/
+scratch/
+
+# Large raw training dataset (optional to ignore to keep repo light)
+network_traffic.csv
+
+# CRITICAL: DO NOT IGNORE the serialized model artifacts!
+# The backend needs these in the GitHub repository to serve predictions on Render:
+!model_pipeline.pkl
+!model_metadata.json

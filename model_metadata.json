@@ -1,0 +1,119 @@
+{
+    "best_model": "Logistic Regression",
+    "evaluation_metrics": {
+        "model_name": "Logistic Regression",
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "confusion_matrix": [
+            [
+                841,
+                0
+            ],
+            [
+                0,
+                360
+            ]
+        ]
+    },
+    "all_candidate_metrics": [
+        {
+            "model_name": "Logistic Regression",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "roc_auc": 1.0,
+            "confusion_matrix": [
+                [
+                    841,
+                    0
+                ],
+                [
+                    0,
+                    360
+                ]
+            ]
+        },
+        {
+            "model_name": "K-Nearest Neighbors (KNN)",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "roc_auc": 1.0,
+            "confusion_matrix": [
+                [
+                    841,
+                    0
+                ],
+                [
+                    0,
+                    360
+                ]
+            ]
+        },
+        {
+            "model_name": "Decision Tree",
+            "accuracy": 0.9992,
+            "precision": 0.9972,
+            "recall": 1.0,
+            "f1_score": 0.9986,
+            "roc_auc": 0.9994,
+            "confusion_matrix": [
+                [
+                    840,
+                    1
+                ],
+                [
+                    0,
+                    360
+                ]
+            ]
+        }
+    ],
+    "input_features": {
+        "numeric": [
+            "flow_duration",
+            "packet_count",
+            "byte_count",
+            "packet_rate",
+            "byte_rate"
+        ],
+        "categorical": [
+            "protocol_type",
+            "service",
+            "flag"
+        ]
+    },
+    "all_transformed_features": [
+        "flow_duration",
+        "packet_count",
+        "byte_count",
+        "packet_rate",
+        "byte_rate",
+        "protocol_type_ICMP",
+        "protocol_type_TCP",
+        "protocol_type_UDP",
+        "service_DNS",
+        "service_FTP",
+        "service_HTTP",
+        "service_HTTPS",
+        "service_OTHER",
+        "service_SSH",
+        "flag_REJ",
+        "flag_RSTO",
+        "flag_S0",
+        "flag_SF"
+    ],
+    "classes": [
+        "Normal",
+        "Anomaly"
+    ],
+    "class_mapping": {
+        "0": "Normal",
+        "1": "Anomaly"
+    }
+}

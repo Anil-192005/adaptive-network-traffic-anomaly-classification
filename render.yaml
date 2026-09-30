@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: adaptive-network-anomaly-api
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements-api.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: MODEL_PATH
+        value: model_pipeline.pkl
+      - key: METADATA_PATH
+        value: model_metadata.json

@@ -31,6 +31,10 @@ scratch/
 # Large raw training dataset (optional to ignore to keep repo light)
 network_traffic.csv
 
+# Temporary tunnel binaries
+cloudflared.exe
+*.exe
+
 # CRITICAL: DO NOT IGNORE the serialized model artifacts!
 # The backend needs these in the GitHub repository to serve predictions on Render:
 !model_pipeline.pkl

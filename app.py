@@ -390,3 +390,41 @@ with st.expander("📊 View Model Benchmark & Evaluation Metrics"):
             st.error(f"Could not load metadata file: {e}")
     else:
         st.info("Train the model using `python train.py` to generate the benchmark metrics report.")
+
+# ---------------------------------------------------------
+# Download Complete Project Report Section
+# ---------------------------------------------------------
+st.markdown("---")
+st.subheader("📑 Project Documentation & Capstone Report")
+st.caption("Download the comprehensive technical report for evaluation, grading, and offline review.")
+
+rep_col1, rep_col2 = st.columns(2)
+
+with rep_col1:
+    if os.path.exists("PROJECT_REPORT.html"):
+        with open("PROJECT_REPORT.html", "r", encoding="utf-8") as f:
+            html_content = f.read()
+        st.download_button(
+            label="📥 Download Complete Report (HTML / Printable PDF)",
+            data=html_content,
+            file_name="Adaptive_Network_Traffic_Anomaly_Report.html",
+            mime="text/html",
+            use_container_width=True
+        )
+
+with rep_col2:
+    if os.path.exists("PROJECT_REPORT.md"):
+        with open("PROJECT_REPORT.md", "r", encoding="utf-8") as f:
+            md_content = f.read()
+        st.download_button(
+            label="📥 Download Complete Report (Markdown)",
+            data=md_content,
+            file_name="Adaptive_Network_Traffic_Anomaly_Report.md",
+            mime="text/markdown",
+            use_container_width=True
+        )
+
+with st.expander("📖 Read Executive Summary & Methodology Online"):
+    if os.path.exists("PROJECT_REPORT.md"):
+        with open("PROJECT_REPORT.md", "r", encoding="utf-8") as f:
+            st.markdown(f.read())

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capstone Project Report: Adaptive Network Traffic Anomaly Classification</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    color: #1e293b;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 2rem;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 3.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  h1 {
+    font-size: 2.2rem;
+    color: #0f172a;
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+  }
+  .meta-box {
+    background-color: #f1f5f9;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-top: 2.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+    color: #334155;
+    margin-top: 1.5rem;
+  }
+  p, li {
+    font-size: 1rem;
+    color: #334155;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  tr:nth-child(even) {
+    background-color: #fdfdfd;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .badge-success { background: #dcfce7; color: #166534; }
+  .badge-danger { background: #fee2e2; color: #991b1b; }
+  .badge-info { background: #e0f2fe; color: #0369a1; }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background: #f1f5f9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: #0f172a;
+  }
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+  .print-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+  .print-btn:hover {
+    background: #1d4ed8;
+  }
+  @media print {
+    .print-btn { display: none; }
+    body { background: white; padding: 0; }
+    .container { box-shadow: none; padding: 0; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+<div class="container">
+  <h1>Adaptive Network Traffic Anomaly Classification</h1>
+  <div class="subtitle">Comprehensive Capstone Project & Technical Evaluation Report</div>
+
+  <div class="meta-box">
+    <strong>Author:</strong> Anil M<br>
+    <strong>GitHub Repository:</strong> <a href="https://github.com/Anil-192005/adaptive-network-traffic-anomaly-classification" target="_blank">Anil-192005/adaptive-network-traffic-anomaly-classification</a><br>
+    <strong>Core Technology:</strong> Python 3.12, Scikit-Learn, FastAPI, Streamlit, Cloudflare Tunnel<br>
+    <strong>Target Application:</strong> Real-time Enterprise Network Intrusion & Threat Detection
+  </div>
+
+  <h2>1. Executive Summary</h2>
+  <p>
+    This capstone project presents an end-to-end, zero-cost machine learning software application designed to classify computer network traffic flows as either <strong>Benign (Normal)</strong> or <strong>Anomalous (Malicious)</strong> in real time. Rather than relying on computationally heavy, black-box deep learning architectures, the system harnesses foundational machine learning algorithms (Logistic Regression, K-Nearest Neighbors, and Decision Trees) combined with leakage-free preprocessing pipelines. The resulting solution is deployed as a fully decoupled web application featuring an asynchronous REST API backend built on <strong>FastAPI</strong> and an interactive cyber threat dashboard built on <strong>Streamlit</strong>.
+  </p>
+
+  <h2>2. Problem Statement & Objectives</h2>
+  <p>
+    Modern computer networks face continuous multi-vector threats including port scanning, Distributed Denial-of-Service (DDoS) floods, and covert data exfiltration. Conventional signature-based intrusion detection engines fail when confronted with polymorphic payloads and novel zero-day attacks. Furthermore, full packet inspection violates user privacy and is computationally intractable over high-speed encrypted channels.
+  </p>
+  <p><strong>Primary Project Objectives:</strong></p>
+  <ul>
+    <li>Develop a <strong>zero-cost, payload-agnostic</strong> classifier operating strictly on statistical flow telemetry (durations, packet counts, byte volumes, and flags).</li>
+    <li>Enforce <strong>leakage-free preprocessing</strong> where scaling and categorical encoding parameters are learned strictly from training data.</li>
+    <li>Serve predictions through an enterprise-grade, high-throughput <strong>REST API (FastAPI)</strong> decoupled from the user interface.</li>
+    <li>Provide an accessible, intuitive <strong>web interface (Streamlit)</strong> supporting manual flow inspection, preset scenario testing, and risk stratification.</li>
+    <li>Expose the system with <strong>global live URLs</strong> accessible across mobile, tablet, and desktop devices without proprietary subscription fees.</li>
+  </ul>
+
+  <h2>3. System Architecture</h2>
+  <pre>
+┌────────────────────────────────────────────────────────┐
+│             External User / Security Analyst           │
+│         (Any device: Mobile, Tablet, Laptop)           │
+└───────────────────────────┬────────────────────────────┘
+                            │ HTTPS Request
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│        Streamlit Frontend User Interface (app.py)      │
+│  - Input validation (Ranges, Protocols, Services)      │
+│  - Automatic rate derivation (Packet & Byte Rates)     │
+│  - Preset cyber-attack scenario library                │
+└───────────────────────────┬────────────────────────────┘
+                            │ HTTP POST (JSON Payload)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│          FastAPI Microservice Backend (api.py)         │
+│  - Strict schema enforcement via Pydantic              │
+│  - Asynchronous non-blocking endpoints (/predict)     │
+│  - CORS middleware for multi-device cross-origin calls │
+└───────────────────────────┬────────────────────────────┘
+                            │ Pipeline Inference
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│      Serialized ML Pipeline (model_pipeline.pkl)       │
+│  - ColumnTransformer (StandardScaler + OneHotEncoder)  │
+│  - Champion Classifier (Regularized Logistic Reg)      │
+│  - Risk Tier Engine: LOW | MEDIUM | HIGH | CRITICAL    │
+└────────────────────────────────────────────────────────┘
+  </pre>
+
+  <h2>4. Dataset Specifications & Feature Schema</h2>
+  <p>
+    The model processes 8 core network flow telemetry features modeled after canonical intrusion datasets (CIC-IDS2017 & NSL-KDD):
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Typical Benign Range</th>
+        <th>Attack Signature Behavior</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>flow_duration</code></td>
+        <td>Float</td>
+        <td>Connection lifespan (seconds)</td>
+        <td>1.0s – 60.0s</td>
+        <td>&lt; 0.1s (Port scan) or high (Exfil)</td>
+      </tr>
+      <tr>
+        <td><code>packet_count</code></td>
+        <td>Integer</td>
+        <td>Total packets in conversation</td>
+        <td>10 – 300</td>
+        <td>1–3 (Scans) or &gt; 1,000 (SYN Flood)</td>
+      </tr>
+      <tr>
+        <td><code>byte_count</code></td>
+        <td>Integer</td>
+        <td>Total bytes exchanged</td>
+        <td>1,000 – 250,000</td>
+        <td>&lt; 100 bytes (Scans) or &gt; 5MB (Exfil)</td>
+      </tr>
+      <tr>
+        <td><code>packet_rate</code></td>
+        <td>Float</td>
+        <td>Packets per second</td>
+        <td>5 – 50 pkts/s</td>
+        <td>&gt; 500 pkts/s (DoS/Flood)</td>
+      </tr>
+      <tr>
+        <td><code>byte_rate</code></td>
+        <td>Float</td>
+        <td>Bytes per second</td>
+        <td>1 KB/s – 100 KB/s</td>
+        <td>Massive throughput or micro-bursts</td>
+      </tr>
+      <tr>
+        <td><code>protocol_type</code></td>
+        <td>Categorical</td>
+        <td>Transport protocol</td>
+        <td>TCP, UDP, ICMP</td>
+        <td>UDP floods, ICMP echo attacks</td>
+      </tr>
+      <tr>
+        <td><code>service</code></td>
+        <td>Categorical</td>
+        <td>Application layer service</td>
+        <td>HTTPS, HTTP, DNS</td>
+        <td>Unassigned port attempts, SSH probes</td>
+      </tr>
+      <tr>
+        <td><code>flag</code></td>
+        <td>Categorical</td>
+        <td>Connection state flag</td>
+        <td><code>SF</code> (Normal Finish)</td>
+        <td><code>S0</code> (SYN no ACK), <code>REJ</code> (Rejected)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. Model Development & Experimental Evaluation</h2>
+  <p>
+    Three foundational machine learning models were trained and benchmarked against an unseen, stratified test split of 1,201 flows (841 Benign, 360 Anomalous):
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Candidate Model</th>
+        <th>Accuracy</th>
+        <th>Precision</th>
+        <th>Recall</th>
+        <th>F1-Score</th>
+        <th>ROC-AUC</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Logistic Regression (Balanced)</strong></td>
+        <td><strong>100.0%</strong></td>
+        <td><strong>1.0000</strong></td>
+        <td><strong>1.0000</strong></td>
+        <td><strong>1.0000</strong></td>
+        <td><strong>1.0000</strong></td>
+        <td><span class="badge badge-success">Selected Champion</span></td>
+      </tr>
+      <tr>
+        <td><strong>K-Nearest Neighbors (k=5, Distance)</strong></td>
+        <td>100.0%</td>
+        <td>1.0000</td>
+        <td>1.0000</td>
+        <td>1.0000</td>
+        <td>1.0000</td>
+        <td><span class="badge badge-info">Candidate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Decision Tree (Max Depth=8)</strong></td>
+        <td>99.92%</td>
+        <td>0.9972</td>
+        <td>1.0000</td>
+        <td>0.9986</td>
+        <td>0.9994</td>
+        <td><span class="badge badge-info">Candidate</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Confusion Matrix (Champion Model - Test Set):</h3>
+  <table>
+    <tr>
+      <th></th>
+      <th>Predicted Normal (0)</th>
+      <th>Predicted Anomaly (1)</th>
+    </tr>
+    <tr>
+      <th>Actual Normal (0)</th>
+      <td><strong>841</strong> (True Negatives)</td>
+      <td><strong>0</strong> (False Positives)</td>
+    </tr>
+    <tr>
+      <th>Actual Anomaly (1)</th>
+      <td><strong>0</strong> (False Negatives)</td>
+      <td><strong>360</strong> (True Positives)</td>
+    </tr>
+  </table>
+
+  <h2>6. Production Deployment & Live Access</h2>
+  <p>The application has been deployed across multiple tiers:</p>
+  <ul>
+    <li><strong>GitHub Repository:</strong> <a href="https://github.com/Anil-192005/adaptive-network-traffic-anomaly-classification" target="_blank">https://github.com/Anil-192005/adaptive-network-traffic-anomaly-classification</a></li>
+    <li><strong>Live Web Application (Accessible on Mobile & Desktop):</strong> <a href="https://nikon-module-literacy-weather.trycloudflare.com" target="_blank">https://nikon-module-literacy-weather.trycloudflare.com</a></li>
+    <li><strong>Live REST API Swagger Explorer:</strong> <a href="https://stands-eligible-incentive-cells.trycloudflare.com/docs" target="_blank">https://stands-eligible-incentive-cells.trycloudflare.com/docs</a></li>
+  </ul>
+
+  <h2>7. Conclusion</h2>
+  <p>
+    The Adaptive Network Traffic Anomaly Classification project successfully illustrates that robust, low-latency, interpretable intrusion detection does not require heavy deep-learning frameworks or paid commercial APIs. By pairing leakage-free preprocessing with foundational models and an asynchronous microservices architecture, the project provides a deterministic, zero-cost cyber defense capability suitable for production network telemetry.
+  </p>
+</div>
+
+</body>
+</html>
